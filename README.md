@@ -12,3 +12,10 @@ Players can interact with these soundscapes to unlock items or lore through soun
 - Clone this repository.
 - Follow the instructions for setup and deployment.
 
+## Infrastructure Deployment
+
+I am providing a CloudFormation template in `IaC/ec2-instance.yaml`.
+To deploy the stack, run:
+
+```powershell
+.\IaC\deploy.ps1 -StackName ZeldaEC2Stack -InstanceType t2.micro
