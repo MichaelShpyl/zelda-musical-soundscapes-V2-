@@ -20,3 +20,11 @@ To deploy the stack, run:
 ```powershell
 .\IaC\deploy.ps1 -StackName ZeldaEC2Stack -InstanceType t2.micro
 
+## Testing
+Use `pytest` to run unit tests:
+```powershell
+pytest
+
+Documentation
+Auto-generated docs are located in the docs/ folder. 
+You can open docs/soundscapes/index.html in a browser to read about the feature logic.
