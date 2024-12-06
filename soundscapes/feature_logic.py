@@ -1,15 +1,15 @@
 """
-Core logic for generating musical soundscapes.
-For now, this is a simple placeholder that returns a list of notes based on the environment.
+feature_logic.py - Contains logic for generating soundscapes based on the given environment.
 """
 
-def generate_soundscape(environment: str):
-    if environment == 'forest':
+def generate_soundscape(env: str):
+    """
+    Return a list of musical notes based on the provided environment.
+    """
+    if env == 'forest':
         return ['C', 'E', 'G']
-    elif environment == 'cave':
+    elif env == 'cave':
         return ['D', 'F', 'A']
-    elif environment == 'waterfall':
+    elif env == 'waterfall':
         return ['G', 'G', 'C']
-    else:
-        return ['B', 'B', 'B']
-
+    return ['B', 'B', 'B']
