@@ -8,5 +8,8 @@ def generate_soundscape(environment: str):
         return ['C', 'E', 'G']
     elif environment == 'cave':
         return ['D', 'F', 'A']
+    elif environment == 'waterfall':
+        return ['G', 'G', 'C']
     else:
         return ['B', 'B', 'B']
+
