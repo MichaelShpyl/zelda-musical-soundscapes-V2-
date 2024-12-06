@@ -19,3 +19,4 @@ To deploy the stack, run:
 
 ```powershell
 .\IaC\deploy.ps1 -StackName ZeldaEC2Stack -InstanceType t2.micro
+
