@@ -3,26 +3,17 @@ feature_logic.py - Logic for generating musical soundscapes.
 """
 
 def generate_soundscape(env: str):
-    """
-    Return a list of musical notes based on the provided environment.
+    if env.strip() == '':
+        # Default pattern if empty string
+        return ['C', 'C', 'C']
 
-    Args:
-        env (str): The environment type, e.g., 'forest', 'cave', or 'waterfall'.
-    
-    Returns:
-        list[str]: A list of notes appropriate for the given environment.
-    """
     if env == 'forest':
-        # Forest environment produces a simple major triad
         return ['C', 'E', 'G']
     elif env == 'cave':
-        # Cave environment produces a darker minor triad
         return ['D', 'F', 'A']
-	# Waterfall environment produces a cascading pattern
     elif env == 'waterfall':
-        return ['G', 'G', 'C']  # We'll refine this later in another PR.
-    elif env == 'mountain': # Mountains are majestic, so let's give them a nice major triad: A, C, E
+        return ['G', 'C', 'G']
+    elif env == 'mountain':
         return ['A', 'C', 'E']
-    
-    # Default notes if environment is unknown
+
     return ['B', 'B', 'B']

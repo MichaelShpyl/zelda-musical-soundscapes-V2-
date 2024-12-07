@@ -8,7 +8,9 @@ def test_cave_soundscape():
     assert generate_soundscape('cave') == ['D', 'F', 'A']
 
 def test_waterfall_soundscape():
-    assert generate_soundscape('waterfall') == ['G', 'G', 'C']
+    # Updated to the new, improved waterfall sound
+    assert generate_soundscape('waterfall') == ['G', 'C', 'G']
+
 
 def test_mountain_soundscape():
     # Checking out the new mountain jam
