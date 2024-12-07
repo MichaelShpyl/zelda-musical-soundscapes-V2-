@@ -17,14 +17,18 @@ Players can interact with these soundscapes to unlock items or lore through soun
 I am providing a CloudFormation template in `IaC/ec2-instance.yaml`.
 To deploy the stack, run:
 
-```powershell
+##powershell
 .\IaC\deploy.ps1 -StackName ZeldaEC2Stack -InstanceType t2.micro
 
 ## Testing
 Use `pytest` to run unit tests:
-```powershell
+##powershell
 pytest
 
-Documentation
-Auto-generated docs are located in the docs/ folder. 
-You can open docs/soundscapes/index.html in a browser to read about the feature logic.
+## Documentation
+
+I use `pdoc` to auto-generate documentation from docstrings in our Python code.
+- Run `pdoc soundscapes --output-dir docs` to regenerate docs locally.
+- Check `docs/index.html` to view the documentation in your browser.
+
+In CI, the docs are generated on each push. You can download the docs artifact from the GitHub Actions run to verify changes without leaving your browser.
