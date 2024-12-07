@@ -6,16 +6,25 @@ jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-
+      - uses: actions/checkout@v2
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
-      
       - name: Install dependencies
-        run: pip install pytest pdoc
-      
+        run: pip install pytest pdoc cfn-lint
+      - name: Lint template
+        run: cfn-lint IaC/ec2-instance.yaml
+      - name: Validate template
+        run: aws cloudformation validate-template --template-body file://IaC/ec2-instance.yaml
       - name: Run tests
-        run: pytest
+        run: python -m pytest
+      - name: Generate docs
+        run: pdoc soundscapes --output-dir docs
+
+      # Upload docs as a build artifact so they can be viewed on GitHub
+      - name: Upload docs artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: documentation
+          path: docs
