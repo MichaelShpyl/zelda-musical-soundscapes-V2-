@@ -19,3 +19,7 @@ def test_mountain_soundscape():
 
 def test_unknown_environment():
     assert generate_soundscape('desert') == ['B', 'B', 'B']
+
+def test_empty_environment():
+    # No environment? No problem, let's default to ['C', 'C', 'C']
+    assert generate_soundscape('') == ['C', 'C', 'C']
