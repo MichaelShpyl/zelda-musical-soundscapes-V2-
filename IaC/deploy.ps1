@@ -2,7 +2,7 @@ Param(
     [string]$StackName = "ZeldaEC2Stack",
     [string]$InstanceType = "t2.micro",
     [string]$KeyName = "myKeyPair",
-    [string]$Environment = "dev"
+    [string]$Environment = "dev" 
 )
 
 # First, run cfn-lint to catch any silly typos or style issues before I bother AWS.
