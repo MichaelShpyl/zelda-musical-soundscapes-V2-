@@ -1,11 +1,21 @@
 """
 feature_logic.py - Core logic for generating musical soundscapes.
+
 """
-def generate_soundscape(env: str):
-    # If env is empty, return a default pattern
+
+def generate_soundscape(env: str) -> list[str]:
+    """
+    Generate a list of musical notes based on the provided environment.
+
+    Args:
+        env (str): The environment type, for example "forest", "cave", "waterfall", or "mountain".
+                   Passing an empty string defaults to a safe fallback pattern.
+
+    Returns:
+        list[str]: A list of notes that represent the soundscape for the specified environment.
+
+    """
     if env.strip() == '':
-        # Let's go super simple if they didn't specify anything
-        # Just a soothing all-C triad
         return ['C', 'C', 'C']
 
     if env == 'forest':
