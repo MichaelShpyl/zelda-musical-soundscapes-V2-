@@ -18,9 +18,11 @@ def generate_soundscape(env: str):
     elif env == 'cave':
         # Cave environment produces a darker minor triad
         return ['D', 'F', 'A']
+	# Waterfall environment produces a cascading pattern
     elif env == 'waterfall':
-        # Waterfall environment produces a cascading pattern
-        return ['G', 'G', 'C']
+        return ['G', 'G', 'C']  # We'll refine this later in another PR.
+    elif env == 'mountain': # Mountains are majestic, so let's give them a nice major triad: A, C, E
+        return ['A', 'C', 'E']
     
     # Default notes if environment is unknown
     return ['B', 'B', 'B']
