@@ -1,10 +1,8 @@
-"""
-feature_logic.py - Logic for generating musical soundscapes.
-"""
-
 def generate_soundscape(env: str):
+    # If env is empty, return a default pattern
     if env.strip() == '':
-        # Default pattern if empty string
+        # Let's go super simple if they didn't specify anything
+        # Just a soothing all-C triad
         return ['C', 'C', 'C']
 
     if env == 'forest':
