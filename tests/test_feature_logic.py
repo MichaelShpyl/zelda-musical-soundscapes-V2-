@@ -10,6 +10,10 @@ def test_cave_soundscape():
 def test_waterfall_soundscape():
     assert generate_soundscape('waterfall') == ['G', 'G', 'C']
 
+def test_mountain_soundscape():
+    # Checking out the new mountain jam
+    assert generate_soundscape('mountain') == ['A', 'C', 'E']
+
 
 def test_unknown_environment():
     assert generate_soundscape('desert') == ['B', 'B', 'B']
