@@ -1,6 +1,5 @@
 """
 feature_logic.py - Core logic for generating musical soundscapes.
-"
 """
 def generate_soundscape(env: str):
     # If env is empty, return a default pattern
