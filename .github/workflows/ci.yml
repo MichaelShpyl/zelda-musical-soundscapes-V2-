@@ -1,16 +1,26 @@
+
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches: [ main, feature/* ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
+<<<<<<< HEAD
+=======
+
+>>>>>>> ef43be7 (feat: Finalize infrastructure, add performance tests, bandit security checks, docs, and CI updates for eu-west-1)
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
+<<<<<<< HEAD
       - name: Install dependencies
         run: pip install pytest pdoc cfn-lint
       - name: Lint template
@@ -28,3 +38,24 @@ jobs:
         with:
           name: documentation
           path: docs
+=======
+
+      - name: Install dependencies
+        run: |
+          pip install pytest pdoc cfn-lint awscli bandit
+
+      - name: Lint CloudFormation
+        run: cfn-lint IaC/*.yaml
+
+      - name: Validate EC2 template
+        run: aws cloudformation validate-template --template-body file://IaC/ec2-instance.yaml --region eu-west-1
+
+      - name: Validate S3 template
+        run: aws cloudformation validate-template --template-body file://IaC/s3-bucket.yaml --region eu-west-1
+
+      - name: Security scan with bandit
+        run: bandit -r soundscapes tests
+
+      - name: Run tests (unit + performance)
+        run: pytest
+>>>>>>> ef43be7 (feat: Finalize infrastructure, add performance tests, bandit security checks, docs, and CI updates for eu-west-1)

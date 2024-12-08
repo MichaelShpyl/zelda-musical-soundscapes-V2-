@@ -1,0 +1,21 @@
+name: Documentation Generation
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  generate-docs:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v2
+        with:
+          python-version: '3.9'
+
+      - name: Install pdoc
+        run: pip install pdoc
+
+      - name: Generate code docs
+        run: pdoc soundscapes --output-dir docs/code-docs

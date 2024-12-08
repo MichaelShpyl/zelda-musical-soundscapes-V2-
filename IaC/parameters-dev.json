@@ -1,0 +1,15 @@
+[
+    {
+      "ParameterKey": "InstanceType",
+      "ParameterValue": "t2.micro"
+    },
+    {
+      "ParameterKey": "KeyName",
+      "ParameterValue": "MyDevKey"
+    },
+    {
+      "ParameterKey": "Environment",
+      "ParameterValue": "dev"
+    }
+  ]
+  

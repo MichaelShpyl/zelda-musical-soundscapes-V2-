@@ -49,28 +49,48 @@
                     <h1 class="modulename">
 <a href="./../soundscapes.html">soundscapes</a><wbr>.feature_logic    </h1>
 
-                
+                        <div class="docstring"><p>feature_logic.py - Logic to generate musical soundscapes based on environment.
+We use simple logic: each environment returns a different triad of notes.
+This is a core function tested by unit tests and measured by performance tests.
+Docstrings used by pdoc for auto doc generation.</p>
+</div>
+
                         <input id="mod-feature_logic-view-source" class="view-source-toggle-state" type="checkbox" aria-hidden="true" tabindex="-1">
 
                         <label class="view-source-button" for="mod-feature_logic-view-source"><span>View Source</span></label>
 
-                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="k">def</span> <span class="nf">generate_soundscape</span><span class="p">(</span><span class="n">env</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a>    <span class="c1"># If env is empty, return a default pattern</span>
-</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a>    <span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a>        <span class="c1"># Let&#39;s go super simple if they didn&#39;t specify anything</span>
-</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a>        <span class="c1"># Just a soothing all-C triad</span>
-</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+                        <div class="pdoc-code codehilite"><pre><span></span><span id="L-1"><a href="#L-1"><span class="linenos"> 1</span></a><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-2"><a href="#L-2"><span class="linenos"> 2</span></a><span class="sd">feature_logic.py - Logic to generate musical soundscapes based on environment.</span>
+</span><span id="L-3"><a href="#L-3"><span class="linenos"> 3</span></a><span class="sd">We use simple logic: each environment returns a different triad of notes.</span>
+</span><span id="L-4"><a href="#L-4"><span class="linenos"> 4</span></a><span class="sd">This is a core function tested by unit tests and measured by performance tests.</span>
+</span><span id="L-5"><a href="#L-5"><span class="linenos"> 5</span></a><span class="sd">Docstrings used by pdoc for auto doc generation.</span>
+</span><span id="L-6"><a href="#L-6"><span class="linenos"> 6</span></a><span class="sd">&quot;&quot;&quot;</span>
 </span><span id="L-7"><a href="#L-7"><span class="linenos"> 7</span></a>
-</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a>    <span class="k">if</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;forest&#39;</span><span class="p">:</span>
-</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">]</span>
-</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;cave&#39;</span><span class="p">:</span>
-</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
-</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;waterfall&#39;</span><span class="p">:</span>
-</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">]</span>
-</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;mountain&#39;</span><span class="p">:</span>
-</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
-</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a>
-</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a>    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
+</span><span id="L-8"><a href="#L-8"><span class="linenos"> 8</span></a><span class="k">def</span> <span class="nf">generate_soundscape</span><span class="p">(</span><span class="n">env</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="L-9"><a href="#L-9"><span class="linenos"> 9</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="L-10"><a href="#L-10"><span class="linenos">10</span></a><span class="sd">    Generate a list of musical notes based on the given environment.</span>
+</span><span id="L-11"><a href="#L-11"><span class="linenos">11</span></a>
+</span><span id="L-12"><a href="#L-12"><span class="linenos">12</span></a><span class="sd">    Args:</span>
+</span><span id="L-13"><a href="#L-13"><span class="linenos">13</span></a><span class="sd">        env (str): environment name (&#39;forest&#39;, &#39;cave&#39;, &#39;waterfall&#39;, &#39;mountain&#39;, or empty)</span>
+</span><span id="L-14"><a href="#L-14"><span class="linenos">14</span></a><span class="sd">                   Empty means a default pattern (C, C, C).</span>
+</span><span id="L-15"><a href="#L-15"><span class="linenos">15</span></a>
+</span><span id="L-16"><a href="#L-16"><span class="linenos">16</span></a><span class="sd">    Returns:</span>
+</span><span id="L-17"><a href="#L-17"><span class="linenos">17</span></a><span class="sd">        list[str]: The notes representing the soundscape.</span>
+</span><span id="L-18"><a href="#L-18"><span class="linenos">18</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="L-19"><a href="#L-19"><span class="linenos">19</span></a>    <span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+</span><span id="L-20"><a href="#L-20"><span class="linenos">20</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+</span><span id="L-21"><a href="#L-21"><span class="linenos">21</span></a>
+</span><span id="L-22"><a href="#L-22"><span class="linenos">22</span></a>    <span class="k">if</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;forest&#39;</span><span class="p">:</span>
+</span><span id="L-23"><a href="#L-23"><span class="linenos">23</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">]</span>
+</span><span id="L-24"><a href="#L-24"><span class="linenos">24</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;cave&#39;</span><span class="p">:</span>
+</span><span id="L-25"><a href="#L-25"><span class="linenos">25</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
+</span><span id="L-26"><a href="#L-26"><span class="linenos">26</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;waterfall&#39;</span><span class="p">:</span>
+</span><span id="L-27"><a href="#L-27"><span class="linenos">27</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">]</span>
+</span><span id="L-28"><a href="#L-28"><span class="linenos">28</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;mountain&#39;</span><span class="p">:</span>
+</span><span id="L-29"><a href="#L-29"><span class="linenos">29</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+</span><span id="L-30"><a href="#L-30"><span class="linenos">30</span></a>
+</span><span id="L-31"><a href="#L-31"><span class="linenos">31</span></a>    <span class="c1"># For unknown environments, return a fallback pattern.</span>
+</span><span id="L-32"><a href="#L-32"><span class="linenos">32</span></a>    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
 </span></pre></div>
 
 
@@ -80,33 +100,50 @@
 <div class="attr function">
             
         <span class="def">def</span>
-        <span class="name">generate_soundscape</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">env</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">):</span></span>
+        <span class="name">generate_soundscape</span><span class="signature pdoc-code condensed">(<span class="param"><span class="n">env</span><span class="p">:</span> <span class="nb">str</span></span><span class="return-annotation">) -> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span>:</span></span>
 
                 <label class="view-source-button" for="generate_soundscape-view-source"><span>View Source</span></label>
 
     </div>
     <a class="headerlink" href="#generate_soundscape"></a>
-            <div class="pdoc-code codehilite"><pre><span></span><span id="generate_soundscape-2"><a href="#generate_soundscape-2"><span class="linenos"> 2</span></a><span class="k">def</span> <span class="nf">generate_soundscape</span><span class="p">(</span><span class="n">env</span><span class="p">:</span> <span class="nb">str</span><span class="p">):</span>
-</span><span id="generate_soundscape-3"><a href="#generate_soundscape-3"><span class="linenos"> 3</span></a>    <span class="c1"># If env is empty, return a default pattern</span>
-</span><span id="generate_soundscape-4"><a href="#generate_soundscape-4"><span class="linenos"> 4</span></a>    <span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
-</span><span id="generate_soundscape-5"><a href="#generate_soundscape-5"><span class="linenos"> 5</span></a>        <span class="c1"># Let&#39;s go super simple if they didn&#39;t specify anything</span>
-</span><span id="generate_soundscape-6"><a href="#generate_soundscape-6"><span class="linenos"> 6</span></a>        <span class="c1"># Just a soothing all-C triad</span>
-</span><span id="generate_soundscape-7"><a href="#generate_soundscape-7"><span class="linenos"> 7</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
-</span><span id="generate_soundscape-8"><a href="#generate_soundscape-8"><span class="linenos"> 8</span></a>
-</span><span id="generate_soundscape-9"><a href="#generate_soundscape-9"><span class="linenos"> 9</span></a>    <span class="k">if</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;forest&#39;</span><span class="p">:</span>
-</span><span id="generate_soundscape-10"><a href="#generate_soundscape-10"><span class="linenos">10</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">]</span>
-</span><span id="generate_soundscape-11"><a href="#generate_soundscape-11"><span class="linenos">11</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;cave&#39;</span><span class="p">:</span>
-</span><span id="generate_soundscape-12"><a href="#generate_soundscape-12"><span class="linenos">12</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
-</span><span id="generate_soundscape-13"><a href="#generate_soundscape-13"><span class="linenos">13</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;waterfall&#39;</span><span class="p">:</span>
-</span><span id="generate_soundscape-14"><a href="#generate_soundscape-14"><span class="linenos">14</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">]</span>
-</span><span id="generate_soundscape-15"><a href="#generate_soundscape-15"><span class="linenos">15</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;mountain&#39;</span><span class="p">:</span>
-</span><span id="generate_soundscape-16"><a href="#generate_soundscape-16"><span class="linenos">16</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
-</span><span id="generate_soundscape-17"><a href="#generate_soundscape-17"><span class="linenos">17</span></a>
-</span><span id="generate_soundscape-18"><a href="#generate_soundscape-18"><span class="linenos">18</span></a>    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
+            <div class="pdoc-code codehilite"><pre><span></span><span id="generate_soundscape-9"><a href="#generate_soundscape-9"><span class="linenos"> 9</span></a><span class="k">def</span> <span class="nf">generate_soundscape</span><span class="p">(</span><span class="n">env</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+</span><span id="generate_soundscape-10"><a href="#generate_soundscape-10"><span class="linenos">10</span></a><span class="w">    </span><span class="sd">&quot;&quot;&quot;</span>
+</span><span id="generate_soundscape-11"><a href="#generate_soundscape-11"><span class="linenos">11</span></a><span class="sd">    Generate a list of musical notes based on the given environment.</span>
+</span><span id="generate_soundscape-12"><a href="#generate_soundscape-12"><span class="linenos">12</span></a>
+</span><span id="generate_soundscape-13"><a href="#generate_soundscape-13"><span class="linenos">13</span></a><span class="sd">    Args:</span>
+</span><span id="generate_soundscape-14"><a href="#generate_soundscape-14"><span class="linenos">14</span></a><span class="sd">        env (str): environment name (&#39;forest&#39;, &#39;cave&#39;, &#39;waterfall&#39;, &#39;mountain&#39;, or empty)</span>
+</span><span id="generate_soundscape-15"><a href="#generate_soundscape-15"><span class="linenos">15</span></a><span class="sd">                   Empty means a default pattern (C, C, C).</span>
+</span><span id="generate_soundscape-16"><a href="#generate_soundscape-16"><span class="linenos">16</span></a>
+</span><span id="generate_soundscape-17"><a href="#generate_soundscape-17"><span class="linenos">17</span></a><span class="sd">    Returns:</span>
+</span><span id="generate_soundscape-18"><a href="#generate_soundscape-18"><span class="linenos">18</span></a><span class="sd">        list[str]: The notes representing the soundscape.</span>
+</span><span id="generate_soundscape-19"><a href="#generate_soundscape-19"><span class="linenos">19</span></a><span class="sd">    &quot;&quot;&quot;</span>
+</span><span id="generate_soundscape-20"><a href="#generate_soundscape-20"><span class="linenos">20</span></a>    <span class="k">if</span> <span class="n">env</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span> <span class="o">==</span> <span class="s1">&#39;&#39;</span><span class="p">:</span>
+</span><span id="generate_soundscape-21"><a href="#generate_soundscape-21"><span class="linenos">21</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">]</span>
+</span><span id="generate_soundscape-22"><a href="#generate_soundscape-22"><span class="linenos">22</span></a>
+</span><span id="generate_soundscape-23"><a href="#generate_soundscape-23"><span class="linenos">23</span></a>    <span class="k">if</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;forest&#39;</span><span class="p">:</span>
+</span><span id="generate_soundscape-24"><a href="#generate_soundscape-24"><span class="linenos">24</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">]</span>
+</span><span id="generate_soundscape-25"><a href="#generate_soundscape-25"><span class="linenos">25</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;cave&#39;</span><span class="p">:</span>
+</span><span id="generate_soundscape-26"><a href="#generate_soundscape-26"><span class="linenos">26</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;D&#39;</span><span class="p">,</span> <span class="s1">&#39;F&#39;</span><span class="p">,</span> <span class="s1">&#39;A&#39;</span><span class="p">]</span>
+</span><span id="generate_soundscape-27"><a href="#generate_soundscape-27"><span class="linenos">27</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;waterfall&#39;</span><span class="p">:</span>
+</span><span id="generate_soundscape-28"><a href="#generate_soundscape-28"><span class="linenos">28</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;G&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;G&#39;</span><span class="p">]</span>
+</span><span id="generate_soundscape-29"><a href="#generate_soundscape-29"><span class="linenos">29</span></a>    <span class="k">elif</span> <span class="n">env</span> <span class="o">==</span> <span class="s1">&#39;mountain&#39;</span><span class="p">:</span>
+</span><span id="generate_soundscape-30"><a href="#generate_soundscape-30"><span class="linenos">30</span></a>        <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span> <span class="s1">&#39;C&#39;</span><span class="p">,</span> <span class="s1">&#39;E&#39;</span><span class="p">]</span>
+</span><span id="generate_soundscape-31"><a href="#generate_soundscape-31"><span class="linenos">31</span></a>
+</span><span id="generate_soundscape-32"><a href="#generate_soundscape-32"><span class="linenos">32</span></a>    <span class="c1"># For unknown environments, return a fallback pattern.</span>
+</span><span id="generate_soundscape-33"><a href="#generate_soundscape-33"><span class="linenos">33</span></a>    <span class="k">return</span> <span class="p">[</span><span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">,</span> <span class="s1">&#39;B&#39;</span><span class="p">]</span>
 </span></pre></div>
 
 
-    
+            <div class="docstring"><p>Generate a list of musical notes based on the given environment.</p>
+
+<p>Args:
+    env (str): environment name ('forest', 'cave', 'waterfall', 'mountain', or empty)
+               Empty means a default pattern (C, C, C).</p>
+
+<p>Returns:
+    list[str]: The notes representing the soundscape.</p>
+</div>
+
 
                 </section>
     </main>

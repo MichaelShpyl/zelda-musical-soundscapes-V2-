@@ -1,0 +1,15 @@
+[
+    {
+      "ParameterKey": "InstanceType",
+      "ParameterValue": "t2.medium"
+    },
+    {
+      "ParameterKey": "KeyName",
+      "ParameterValue": "MyProdKey"
+    },
+    {
+      "ParameterKey": "Environment",
+      "ParameterValue": "prod"
+    }
+  ]
+  
