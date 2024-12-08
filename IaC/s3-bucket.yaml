@@ -1,0 +1,29 @@
+AWSTemplateFormatVersion: "2010-09-09"
+Description: "Deploy a private S3 bucket, parameterized by name and environment."
+
+Parameters:
+  BucketName:
+    Type: String
+    Description: "Globally unique S3 bucket name. Modify before deploying."
+  Environment:
+    Type: String
+    Default: dev
+    AllowedValues:
+      - dev
+      - prod
+    Description: "Environment tag"
+
+Resources:
+  MyBucket:
+    Type: AWS::S3::Bucket
+    Properties:
+      BucketName: !Ref BucketName
+      AccessControl: Private
+      Tags:
+        - Key: Environment
+          Value: !Ref Environment
+
+Outputs:
+  BucketName:
+    Value: !Ref MyBucket
+    Description: "The created S3 bucket name"
