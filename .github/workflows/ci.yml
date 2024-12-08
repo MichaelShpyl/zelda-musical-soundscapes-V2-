@@ -56,6 +56,9 @@ jobs:
       - name: Security scan with bandit
         run: bandit -r soundscapes tests
 
+        - name: Build and test (Maven)
+        run: mvn clean test
+
       - name: Run tests (unit + performance)
         run: pytest
 >>>>>>> ef43be7 (feat: Finalize infrastructure, add performance tests, bandit security checks, docs, and CI updates for eu-west-1)
