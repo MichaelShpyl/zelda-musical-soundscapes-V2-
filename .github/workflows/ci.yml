@@ -54,7 +54,7 @@ jobs:
 
       # Upload docs as a build artifact
       - name: Upload docs artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: documentation
           path: docs
