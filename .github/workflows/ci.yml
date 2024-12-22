@@ -26,8 +26,8 @@ jobs:
       - name: Lint CloudFormation
         run: cfn-lint IaC/*.yaml
 
-      - name: Validate EC2 template
-        run: aws cloudformation validate-template --template-body file://IaC/ec2-instance.yaml --region eu-west-1
+      - name: Validate S3 template
+        run: aws cloudformation validate-template --template-body file://IaC/s3-bucket.yaml --region eu-west-1
 
       - name: Security scan with Bandit
         run: bandit -r soundscapes tests
