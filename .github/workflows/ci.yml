@@ -1,73 +1,72 @@
-name: CI  # Name of the GitHub Actions workflow
+name: CI
 
 on:
-  # Trigger this workflow on pushes to the main or feature branches
   push:
     branches: [ main, feature/* ]
-  # Trigger this workflow for pull requests targeting the main branch
   pull_request:
     branches: [ main ]
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest  # Use the latest Ubuntu environment for the job
-
+    runs-on: ubuntu-latest
     steps:
-      # Step 1: Check out the repository to the runner
-      - name: Check out code
-        uses: actions/checkout@v2  # Standard GitHub Action for repository checkout
+      # Step to check out the repository
+      - name: Check out repository
+        uses: actions/checkout@v2
+        # Comment: Always start by pulling the latest code from GitHub. Gotta work with the freshest stuff!
 
-      # Step 2: Set up a Python environment for the pipeline
+      # Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'  # Specify the Python version to use
+          python-version: '3.9'
+        # Comment: Setting up Python 3.9 for all the fun packages we need later.
 
-      # Step 3: Install dependencies for testing, linting, and documentation
+      # Install dependencies
       - name: Install dependencies
         run: |
           pip install pytest pdoc cfn-lint awscli bandit
-        # These tools are used for testing, generating documentation, and security analysis
+        # Comment: Loading up the tools for tests, docs, and AWS linting. Make sure everything we need is here.
 
-      # Step 4: Lint CloudFormation templates to ensure they follow best practices
+      # Lint CloudFormation templates
       - name: Lint CloudFormation
         run: cfn-lint IaC/*.yaml
-        # IaC refers to "Infrastructure as Code" files for AWS services
+        # Comment: YAML errors? Nope, not on my watch. This ensures CloudFormation templates are clean.
 
-      # Step 5: Validate the EC2 CloudFormation template
+      # Validate EC2 template
       - name: Validate EC2 template
         run: aws cloudformation validate-template --template-body file://IaC/ec2-instance.yaml --region eu-west-1
-        # Validates syntax and structure for deploying EC2 instances
+        # Comment: Double-check the EC2 CloudFormation template. AWS better not complain.
 
-      # Step 6: Validate the S3 CloudFormation template
+      # Validate S3 template
       - name: Validate S3 template
         run: aws cloudformation validate-template --template-body file://IaC/s3-bucket.yaml --region eu-west-1
-        # Ensures that S3 bucket configurations are deployable
+        # Comment: Same drill for the S3 template. Bye-bye AccessControl warnings.
 
-      # Step 7: Perform a security scan using Bandit
+      # Security scan using Bandit
       - name: Security scan with Bandit
         run: bandit -r soundscapes tests
-        # Bandit scans Python files in the soundscapes and tests directories for vulnerabilities
+        # Comment: Bandit on patrol! But now it sticks to `soundscapes` and `tests`. No unnecessary drama.
 
-      # Step 8: Build and test Java code using Maven (if applicable)
+      # Run tests with Maven (if needed)
       - name: Build and test (Maven)
         run: mvn clean test
-        # This step ensures Java-based components are built and tested
+        # Comment: Maven time! If there’s Java involved, we make sure it works.
 
-      # Step 9: Run unit and performance tests with pytest
+      # Run Python tests (unit and performance)
       - name: Run tests (unit + performance)
         run: pytest
-        # pytest is used for running both unit and performance tests
+        # Comment: Running all the Python tests to ensure functionality and performance is 🔥.
 
-      # Step 10: Generate HTML documentation using pdoc
+      # Generate documentation using pdoc
       - name: Generate docs
         run: pdoc soundscapes --output-dir docs
-        # pdoc generates up-to-date API documentation for the project
+        # Comment: Auto-doc generation. Let’s make our code easier to understand without manual typing.
 
-      # Step 11: Archive the generated documentation as a build artifact
+      # Upload docs as a build artifact
       - name: Upload docs artifact
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v2
         with:
           name: documentation
           path: docs
-        # The documentation is stored as an artifact for future reference
+        # Comment: Uploading docs so the team can grab them easily from the Actions tab.
