@@ -8,15 +8,20 @@ jobs:
   generate-docs:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      # Step 1: Checkout the repository code
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      # Step 2: Set up Python
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
 
+      # Step 3: Install pdoc
       - name: Install pdoc
         run: pip install pdoc
 
+      # Step 4: Generate code documentation
       - name: Generate code docs
         run: pdoc --docformat markdown --output-dir docs/code-docs soundscapes
-
