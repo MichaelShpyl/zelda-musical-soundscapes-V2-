@@ -1,45 +1,83 @@
-name: CI  # Name of the GitHub Actions workflow
+# GitHub Actions Workflow for Zelda Musical Soundscapes
+# Hey! This file is where all the CI/CD magic happens. 
+# It automates testing, security scans, builds, and everything in between. Let's break it down!
 
+name: CI Pipeline
+
+# This workflow runs automatically every time I push or make a pull request to the repository.
 on:
   push:
-    branches: [ main, feature/* ]
+    branches:
+      - main  # Only trigger when I push to the main branch (our 'safe' branch).
   pull_request:
-    branches: [ main ]
+    branches:
+      - main  # Also runs for pull requests heading into main to catch errors early.
 
+# Job definitions – think of these like tasks in a checklist.
 jobs:
-  build-and-test:
-    runs-on: ubuntu-latest
+  build-and-test:  # The name of this job.
+    runs-on: ubuntu-latest  # My go-to choice: a fresh Ubuntu environment.
 
     steps:
+      # Step 1: Checkout the code from the repo.
       - name: Check out code
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        # This is just me pulling down the latest version of the code from GitHub.
+        # Without this, the pipeline has no clue what to build or test.
 
-      - name: Set up Python
-        uses: actions/setup-python@v2
+      # Step 2: Set up Python (for testing and running Bandit).
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v4
         with:
-          python-version: '3.9'
+          python-version: 3.9  # Yep, I'm standardizing Python 3.9 across the project.
 
+      # Step 3: Install dependencies.
       - name: Install dependencies
         run: |
-          pip install pytest pdoc cfn-lint awscli bandit
+          python -m pip install --upgrade pip  # Always good to use the latest pip.
+          pip install -r requirements.txt  # All the tools, libraries, and frameworks I need.
 
-      - name: Lint CloudFormation
-        run: cfn-lint IaC/*.yaml
+      # Step 4: Run Pytest for unit testing.
+      - name: Run unit tests
+        run: |
+          pytest --disable-warnings
+        # This is where my test suite checks if the code behaves as expected.
+        # If this fails, it’s usually a coding issue in one of the features I added.
 
-      - name: Security scan with Bandit
-        run: bandit -r soundscapes tests
+      # Step 5: Perform security scans with Bandit.
+      - name: Run Bandit security scan
+        run: |
+          bandit -r .  # This checks my code for security vulnerabilities.
+        # Example: If I accidentally left hardcoded credentials in the code, Bandit will call me out.
+        # Trust me, it's worth the headache now to save embarrassment later.
 
-      - name: Build and test (Maven)
-        run: mvn clean test
+      # Step 6: Generate documentation using Pdoc.
+      - name: Generate documentation
+        run: |
+          pdoc --html --output-dir docs soundscapes
+        # This step auto-generates clean and updated docs for my project.
+        # Handy when you don’t want to manually explain every function or module to someone!
 
-      - name: Run tests (unit + performance)
-        run: pytest
+      # Step 7: Performance testing.
+      - name: Run performance tests
+        run: |
+          python -m pytest tests/performance
+        # These tests make sure my feature scales well and runs efficiently. 
+        # You don't want to wait ages for 10,000 iterations!
 
-      - name: Generate docs
-        run: pdoc soundscapes --output-dir docs
+      # Step 8: Validate AWS CloudFormation templates.
+      - name: Validate CloudFormation templates
+        run: |
+          aws cloudformation validate-template --template-body file://IaC/main.yaml
+        # This checks that my infrastructure-as-code files are legit.
+        # Trust me, debugging a failed AWS deploy mid-demo isn’t fun.
 
-      - name: Upload docs artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: documentation
-          path: docs
+      # Step 9: Deploy to staging (Optional – can uncomment if deploying is required).
+      # - name: Deploy to staging
+      #   run: ./deploy.sh
+      # Right now, this step is commented out since I’m focusing on testing and validation.
+      # But when I’m confident everything works, staging is the next stop before production.
+
+# End of pipeline
+# Whew, that’s a wrap! Every step here is designed to save me from future headaches.
+# From catching bugs to validating infrastructure, this pipeline’s my safety net.
