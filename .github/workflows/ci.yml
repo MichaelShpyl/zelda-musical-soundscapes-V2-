@@ -1,60 +1,73 @@
-name: CI
+name: CI  # Name of the GitHub Actions workflow
 
 on:
+  # Trigger this workflow on pushes to the main or feature branches
   push:
     branches: [ main, feature/* ]
+  # Trigger this workflow for pull requests targeting the main branch
   pull_request:
     branches: [ main ]
 
 jobs:
   build-and-test:
-    runs-on: ubuntu-latest
-    steps:
-      # Step to check out the repository
-      - uses: actions/checkout@v2
+    runs-on: ubuntu-latest  # Use the latest Ubuntu environment for the job
 
-      # Set up Python environment
+    steps:
+      # Step 1: Check out the repository to the runner
+      - name: Check out code
+        uses: actions/checkout@v2  # Standard GitHub Action for repository checkout
+
+      # Step 2: Set up a Python environment for the pipeline
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
-          python-version: '3.9'
+          python-version: '3.9'  # Specify the Python version to use
 
-      # Install dependencies
+      # Step 3: Install dependencies for testing, linting, and documentation
       - name: Install dependencies
         run: |
           pip install pytest pdoc cfn-lint awscli bandit
+        # These tools are used for testing, generating documentation, and security analysis
 
-      # Lint CloudFormation templates
+      # Step 4: Lint CloudFormation templates to ensure they follow best practices
       - name: Lint CloudFormation
         run: cfn-lint IaC/*.yaml
+        # IaC refers to "Infrastructure as Code" files for AWS services
 
-      # Validate EC2 template
+      # Step 5: Validate the EC2 CloudFormation template
       - name: Validate EC2 template
         run: aws cloudformation validate-template --template-body file://IaC/ec2-instance.yaml --region eu-west-1
+        # Validates syntax and structure for deploying EC2 instances
 
-      # Validate S3 template
+      # Step 6: Validate the S3 CloudFormation template
       - name: Validate S3 template
         run: aws cloudformation validate-template --template-body file://IaC/s3-bucket.yaml --region eu-west-1
+        # Ensures that S3 bucket configurations are deployable
 
-      # Security scan using Bandit
+      # Step 7: Perform a security scan using Bandit
       - name: Security scan with Bandit
         run: bandit -r soundscapes tests
+        # Bandit scans Python files in the soundscapes and tests directories for vulnerabilities
 
-      # Run tests with Maven (if needed)
+      # Step 8: Build and test Java code using Maven (if applicable)
       - name: Build and test (Maven)
         run: mvn clean test
+        # This step ensures Java-based components are built and tested
 
-      # Run Python tests (unit and performance)
+      # Step 9: Run unit and performance tests with pytest
       - name: Run tests (unit + performance)
         run: pytest
+        # pytest is used for running both unit and performance tests
 
-      # Generate documentation using pdoc
+      # Step 10: Generate HTML documentation using pdoc
       - name: Generate docs
         run: pdoc soundscapes --output-dir docs
+        # pdoc generates up-to-date API documentation for the project
 
-      # Upload docs as a build artifact
+      # Step 11: Archive the generated documentation as a build artifact
       - name: Upload docs artifact
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
           name: documentation
           path: docs
+        # The documentation is stored as an artifact for future reference
