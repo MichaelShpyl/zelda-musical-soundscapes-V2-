@@ -11,39 +11,58 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
+      # Step to check out the repository
       - name: Check out code
         uses: actions/checkout@v2
 
+      # Set up Python environment
       - name: Set up Python
         uses: actions/setup-python@v2
         with:
           python-version: '3.9'
 
+      # Install dependencies
       - name: Install dependencies
         run: |
           pip install pytest pdoc cfn-lint awscli bandit
 
+      # Configure AWS Credentials
+      - name: Configure AWS Credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ secrets.AWS_REGION }}
+
+      # Lint CloudFormation templates
       - name: Lint CloudFormation
         run: cfn-lint IaC/*.yaml
 
+      # Validate EC2 template
       - name: Validate EC2 template
         run: aws cloudformation validate-template --template-body file://IaC/ec2-instance.yaml --region eu-west-1
 
+      # Validate S3 template
       - name: Validate S3 template
         run: aws cloudformation validate-template --template-body file://IaC/s3-bucket.yaml --region eu-west-1
 
+      # Security scan using Bandit
       - name: Security scan with Bandit
         run: bandit -r soundscapes tests
 
+      # Run tests with Maven (if needed)
       - name: Build and test (Maven)
         run: mvn clean test
 
+      # Run Python tests (unit and performance)
       - name: Run tests (unit + performance)
         run: pytest
 
+      # Generate documentation using pdoc
       - name: Generate docs
         run: pdoc soundscapes --output-dir docs
 
+      # Upload docs as a build artifact
       - name: Upload docs artifact
         uses: actions/upload-artifact@v3
         with:
