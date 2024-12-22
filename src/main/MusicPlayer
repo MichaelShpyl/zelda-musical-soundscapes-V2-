@@ -1,4 +1,5 @@
 package com.example.zelda;
+package main;
 
 public class MusicPlayer {
     public void playSound(String sound) {
