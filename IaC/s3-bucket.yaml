@@ -1,29 +1,21 @@
-AWSTemplateFormatVersion: "2010-09-09"
-Description: "Deploy a private S3 bucket in eu-west-1, parameterized by name and environment."
-
-Parameters:
-  BucketName:
-    Type: String
-    Description: "A globally unique S3 bucket name, e.g. my-unique-bucket-<your initials>."
-  Environment:
-    Type: String
-    Default: dev
-    AllowedValues:
-      - dev
-      - prod
-    Description: "Tagging environment to differentiate dev from prod resources."
-
 Resources:
-  MyBucket:
-    Type: AWS::S3::Bucket
+  MyS3Bucket:
+    Type: "AWS::S3::Bucket"
     Properties:
-      BucketName: !Ref BucketName
-      AccessControl: Private
-      Tags:
-        - Key: Environment
-          Value: !Ref Environment
-
-Outputs:
-  BucketName:
-    Value: !Ref MyBucket
-    Description: "The created S3 bucket name."
+      BucketName: my-s3-bucket
+      PublicAccessBlockConfiguration:
+        BlockPublicAcls: true
+        BlockPublicPolicy: true
+        IgnorePublicAcls: true
+        RestrictPublicBuckets: true
+  MyS3BucketPolicy:
+    Type: "AWS::S3::BucketPolicy"
+    Properties:
+      Bucket: !Ref MyS3Bucket
+      PolicyDocument:
+        Version: "2012-10-17"
+        Statement:
+          - Effect: "Allow"
+            Principal: "*"
+            Action: "s3:GetObject"
+            Resource: !Sub "${MyS3Bucket.Arn}/*"
