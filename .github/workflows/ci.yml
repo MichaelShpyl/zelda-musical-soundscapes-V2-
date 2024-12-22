@@ -54,7 +54,8 @@ jobs:
       # Step 6: Generate documentation using Pdoc.
       - name: Generate documentation
         run: |
-          pdoc --html --output-dir docs soundscapes
+          pdoc -d html -o docs soundscapes
+
         # This step auto-generates clean and updated docs for my project.
         # Handy when you don’t want to manually explain every function or module to someone!
 
